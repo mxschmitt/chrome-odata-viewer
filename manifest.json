@@ -11,7 +11,6 @@
     },
     "permissions": [
         "tabs",
-        "contextMenus",
         "<all_urls>"
     ],
     "devtools_page": "devtools.html"
