@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="node_modules/semantic-ui-css/semantic.min.css">
     <script src="node_modules/semantic-ui-css/semantic.min.js"></script>
     <link rel="stylesheet" href="node_modules/json-tree-view/devtools.css">
-    <script src="tab-out.js"></script>
+    <script src="dist/tab.js"></script>
 </head>
 
 <body>
@@ -19,6 +19,8 @@
             <thead>
                 <tr>
                     <th>URL Path</th>
+                    <th>Kind</th>
+                    <th>Name</th>
                     <th>Timestamp</th>
                 </tr>
             </thead>
@@ -32,10 +34,19 @@
 
         </div>
         <div class="content">
-
+            <div class="ui stackable two column grid">
+                <div class="column">
+                    <h3 class="ui header">Request Data</h3>
+                    <div></div>
+                </div>
+                <div class="column">
+                    <h3 class="ui header">Response Data</h3>
+                    <div></div>
+                </div>
+            </div>
         </div>
         <div class="actions">
-            <div class="ui green button">Copy Payload</div>
+            <div class="ui red button">Close</div>
         </div>
     </div>
 </body>
