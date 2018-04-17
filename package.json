@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "repository": "https://github.com/mxschmitt/chrome-odata-viewer",
   "author": "Max Schmitt",
+  "description": "Displays the ui5 oData network requests in a beautified clickable way like JSON.",
   "license": "MIT",
   "dependencies": {
     "browserify": "^16.2.0",
