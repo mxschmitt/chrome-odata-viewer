@@ -1,3 +1,3 @@
 # chrome-odata-viewer
 
-Displays the ui5 oData network requests in a beautified clickable way like JSON.
+Displays the UI5 OData network requests in a beautified clickable way like JSON.

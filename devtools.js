@@ -30,11 +30,11 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                     value: removeQuotesIfExist(item.split("=")[1])
                 }));
             }
-            let matchOdataCall = /GET (\w+)\((.*')\)/.exec(data.request.postData.text)
-            if (matchOdataCall) {
-                kind = "oData read"
-                name = matchOdataCall[1]
-                requestData = matchOdataCall[2].split(",").map(item => ({
+            let matchODataCall = /GET (\w+)\((.*')\)/.exec(data.request.postData.text)
+            if (matchODataCall) {
+                kind = "OData read"
+                name = matchODataCall[1]
+                requestData = matchODataCall[2].split(",").map(item => ({
                     key: item.split("=")[0],
                     value: removeQuotesIfExist(item.split("=")[1])
                 }))
