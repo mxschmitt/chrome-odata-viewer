@@ -1,7 +1,7 @@
 {
-    "name": "ui5 oData Request Beautifier",
+    "name": "UI5 OData Payload Analyzer",
     "version": "1.0",
-    "description": "Displays the ui5 oData network requests in a beautified clickable way like JSON.",
+    "description": "Displays the UI5 OData network requests and response payload in a beautified clickable way.",
     "manifest_version": 2,
     "icons": {
         "16": "icon16.png",
