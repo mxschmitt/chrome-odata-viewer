@@ -1,0 +1,15 @@
+{
+  "name": "chrome-ui5-odata-viewer",
+  "version": "1.0.0",
+  "repository": "https://github.com/mxschmitt/chrome-odata-viewer",
+  "author": "Max Schmitt",
+  "license": "MIT",
+  "dependencies": {
+    "browserify": "^16.2.0",
+    "json-tree-view": "^0.4.9",
+    "semantic-ui-css": "^2.3.1"
+  },
+  "scripts": {
+    "install": "browserify -d -e tab.js -o tab-out.js"
+  }
+}

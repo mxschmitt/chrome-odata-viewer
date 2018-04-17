@@ -1,0 +1,18 @@
+{
+    "name": "ui5 oData Request Beautifier",
+    "version": "1.0",
+    "description": "Displays the ui5 oData network requests in a beautified clickable way like JSON.",
+    "manifest_version": 2,
+    "icons": {
+        "16": "icon16.png",
+        "32": "icon32.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "permissions": [
+        "tabs",
+        "contextMenus",
+        "<all_urls>"
+    ],
+    "devtools_page": "devtools.html"
+}
