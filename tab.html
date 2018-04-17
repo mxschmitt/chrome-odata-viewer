@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="node_modules/semantic-ui-css/semantic.min.css">
+    <script src="node_modules/semantic-ui-css/semantic.min.js"></script>
+    <link rel="stylesheet" href="node_modules/json-tree-view/devtools.css">
+    <script src="tab-out.js"></script>
+</head>
+
+<body>
+    <div class="ui container">
+        <h1 class="ui header" style="margin-top: 20px">oData Payload Beautifier</h1>
+        <table class="ui selectable celled table" id="view-table">
+            <thead>
+                <tr>
+                    <th>URL Path</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="ui fullscreen modal">
+        <i class="close icon"></i>
+        <div class="header">
+
+        </div>
+        <div class="content">
+
+        </div>
+        <div class="actions">
+            <div class="ui green button">Copy Payload</div>
+        </div>
+    </div>
+</body>
+
+</html>
