@@ -52,10 +52,10 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 name: name,
                 timestamp: data.startedDateTime
             }
-            console.debug("Sending message to the ui5 tab", eventData)
+            console.debug("Sending message to the tab", eventData)
             chrome.runtime.sendMessage(eventData)
         })
     }
 })
 
-chrome.devtools.panels.create("oData Inspector", null, "tab.html")
+chrome.devtools.panels.create("oData Payload Inspector", null, "tab.html")
