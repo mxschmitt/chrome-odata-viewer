@@ -4,7 +4,7 @@ let store = []
 
 let showItem = index => {
     let currentItem = store[index]
-    $(".modal > .header").text(`${currentItem.kind}: ${currentItem.name} (${currentItem.path})`)
+    $(".modal > .header").text(`${currentItem.requestType}: ${currentItem.name} (${currentItem.path})`)
 
     if (currentItem.requestData) {
         var requestJSONTree = new JSONTreeView("Payload", currentItem.requestData)
@@ -26,7 +26,7 @@ $(document).ready(() => {
         store.push(data)
         viewTable.find("tbody").append(`<tr>
             <td>${data.path}</td>
-            <td>${data.kind}</td>
+            <td>${data.requestType}</td>
             <td>${data.name}</td>
             <td>${data.timestamp}</td>
         </tr>`)
