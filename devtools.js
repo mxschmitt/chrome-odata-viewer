@@ -19,11 +19,11 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 return
             }
             let name,
-                kind,
+                requestType,
                 requestData
             let matchFunctionCall = /GET (\w+)(?:\?|)(?:\(|)(.*)(?:\)|) HTTP/.exec(data.request.postData.text)
             if (matchFunctionCall) {
-                kind = "Function Import"
+                requestType = "Function Import"
                 name = matchFunctionCall[1]
                 if (matchFunctionCall[2]) {
                     requestData = matchFunctionCall[2].split("&").map(item => ({
@@ -34,7 +34,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
             }
             let matchODataCall = /GET (\w+)\((.*')\)/.exec(data.request.postData.text)
             if (matchODataCall) {
-                kind = "OData Read"
+                requestType = "OData Read"
                 name = matchODataCall[1]
                 requestData = matchODataCall[2].split(",").map(item => ({
                     key: item.split("=")[0],
@@ -51,7 +51,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 path: urlParser.pathname,
                 responseBody: responseBody,
                 requestData: requestData,
-                kind: kind,
+                requestType: requestType,
                 name: name,
                 timestamp: data.startedDateTime
             }
