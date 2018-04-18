@@ -23,8 +23,8 @@ let showItem = index => {
 $(document).ready(() => {
     let viewTable = $("#view-table")
     chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
-        store.push(data)
-        viewTable.find("tbody").append(`<tr>
+        store.unshift(data)
+        viewTable.find("tbody").prepend(`<tr>
             <td>${data.path}</td>
             <td>${data.requestType}</td>
             <td>${data.name}</td>
