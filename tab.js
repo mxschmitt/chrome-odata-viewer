@@ -21,6 +21,11 @@ let showItem = index => {
 }
 
 $(document).ready(() => {
+    if (chrome.devtools.panels.themeName === "dark") {
+        $("body").toggleClass("ui inverted")
+        $(".header").toggleClass("inverted")
+        $("#view-table").toggleClass("inverted")
+    }
     let viewTable = $("#view-table")
     chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
         store.unshift(data)
