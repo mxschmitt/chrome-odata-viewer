@@ -53,7 +53,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 requestData: requestData,
                 requestType: requestType,
                 name: name,
-                timestamp: data.startedDateTime
+                timestamp: new Date(data.startedDateTime).toTimeString().split(' ')[0]
             }
             console.debug("Sending message to the tab", eventData)
             chrome.runtime.sendMessage(eventData)
