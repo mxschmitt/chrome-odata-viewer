@@ -67,3 +67,4 @@ typings/
 
 yarn.lock
 dist
+_config.yml
