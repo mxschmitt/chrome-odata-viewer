@@ -13,6 +13,6 @@
     "shx": "^0.2.2"
   },
   "scripts": {
-    "install": "browserify -d -e tab.js -o dist/tab.js && browserify -d -e devtools.js -o dist/devtools.js && shx rm _config.yml"
+    "install": "browserify -d -e tab.js -o dist/tab.js && browserify -d -e devtools.js -o dist/devtools.js && shx rm -f _config.yml"
   }
 }
