@@ -23,7 +23,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 requestData
             let matchFunctionCall = /GET (\w+)\?(.*) HTTP/.exec(data.request.postData.text)
             if (matchFunctionCall) {
-                kind = "Function Call"
+                kind = "Function Import"
                 name = matchFunctionCall[1]
                 requestData = matchFunctionCall[2].split("&").map(item => ({
                     key: item.split("=")[0],
@@ -32,7 +32,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
             }
             let matchODataCall = /GET (\w+)\((.*')\)/.exec(data.request.postData.text)
             if (matchODataCall) {
-                kind = "OData read"
+                kind = "OData Read"
                 name = matchODataCall[1]
                 requestData = matchODataCall[2].split(",").map(item => ({
                     key: item.split("=")[0],
@@ -44,6 +44,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 responseBody = responseBody.d
             }
             responseBody = deleteKey(responseBody, "__metadata")
+            responseBody = deleteKey(responseBody, "__deferred")
             let eventData = {
                 path: urlParser.pathname,
                 responseBody: responseBody,

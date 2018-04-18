@@ -4,7 +4,7 @@ let store = []
 
 let showItem = index => {
     let currentItem = store[index]
-    $(".modal > .header").text(currentItem.path)
+    $(".modal > .header").text(`${currentItem.kind}: ${currentItem.name} (${currentItem.path})`)
 
     var requestJSONTree = new JSONTreeView("example", currentItem.requestData)
     requestJSONTree.expand(true);
