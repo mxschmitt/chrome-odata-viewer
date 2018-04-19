@@ -20,7 +20,15 @@ let showItem = index => {
     $('.fullscreen.modal').modal('show');
 }
 
+let clearTable = () => {
+    store = []
+    $("#view-table tbody").empty()
+}
+
 $(document).ready(() => {
+    $("#clear-button").click(() => {
+        clearTable()
+    })
     if (chrome.devtools.panels.themeName === "dark") {
         $("body").toggleClass("ui inverted")
         $(".header").toggleClass("inverted")
