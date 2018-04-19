@@ -75,7 +75,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 if (matchFunctionCall[2]) {
                     requestData = matchFunctionCall[2].split("&").map(item => ({
                         key: item.split("=")[0],
-                        value: removeQuotesIfExist(item.split("=")[1])
+                        value: decodeURIComponent(removeQuotesIfExist(item.split("=")[1]))
                     }))
                 }
             } else {
