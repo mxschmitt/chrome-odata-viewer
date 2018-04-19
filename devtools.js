@@ -8,6 +8,44 @@ let removeQuotesIfExist = value => {
     return value
 }
 
+let unmarshalJSONIfPossible = data => {
+    switch (typeof data) {
+        case "object":
+            Object.keys(data).forEach(key => {
+                data[key] = unmarshalJSONIfPossible(data[key])
+            })
+            break
+
+        case "array":
+            for (let i = 0; i < data.length; data++) {
+                data[i] = unmarshalJSONIfPossible(data[i])
+            }
+            break
+        case "number":
+        case "boolean":
+            break
+        case "string":
+            let tmp;
+            try {
+                tmp = JSON.parse(decodeURIComponent(escape(data)))
+            } catch (err) { }
+            if (tmp) {
+                data = unmarshalJSONIfPossible(tmp)
+            } else {
+                let decodedData
+                try {
+                    decodedData = decodeURIComponent(escape(data))
+                } catch (err) { }
+                if (decodedData) {
+                    data = decodedData
+                }
+            }
+        default:
+            break
+    }
+    return data
+}
+
 chrome.devtools.network.onRequestFinished.addListener(data => {
     if (data.request.url.includes("$batch")) {
         let urlParser = document.createElement('a')
@@ -47,6 +85,8 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
             }
             responseBody = deleteKey(responseBody, "__metadata")
             responseBody = deleteKey(responseBody, "__deferred")
+            responseBody = unmarshalJSONIfPossible(responseBody)
+            requestData = unmarshalJSONIfPossible(requestData)
             let eventData = {
                 path: urlParser.pathname,
                 responseBody: responseBody,
