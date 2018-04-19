@@ -59,17 +59,8 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
             let name,
                 requestType,
                 requestData
+
             let matchFunctionCall = /GET (\w+)(?:\?|)(?:\(|)(.*)(?:\)|) HTTP/.exec(data.request.postData.text)
-            if (matchFunctionCall) {
-                requestType = "Function Import"
-                name = matchFunctionCall[1]
-                if (matchFunctionCall[2]) {
-                    requestData = matchFunctionCall[2].split("&").map(item => ({
-                        key: item.split("=")[0],
-                        value: removeQuotesIfExist(item.split("=")[1])
-                    }))
-                }
-            }
             let matchODataCall = /GET (\w+)\((.*')\)/.exec(data.request.postData.text)
             if (matchODataCall) {
                 requestType = "OData Read"
@@ -78,7 +69,20 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                     key: item.split("=")[0],
                     value: removeQuotesIfExist(item.split("=")[1])
                 }))
+            } else if (matchFunctionCall) {
+                requestType = "Function Import"
+                name = matchFunctionCall[1]
+                if (matchFunctionCall[2]) {
+                    requestData = matchFunctionCall[2].split("&").map(item => ({
+                        key: item.split("=")[0],
+                        value: removeQuotesIfExist(item.split("=")[1])
+                    }))
+                }
+            } else {
+                console.error(`could not determine request type: ${data.request.postData.text}`)
+                return
             }
+
             let responseBody = JSON.parse(matchPayload[0])
             if ('d' in responseBody) {
                 responseBody = responseBody.d
