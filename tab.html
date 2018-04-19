@@ -20,12 +20,21 @@
         .jsonView>.value.string {
             white-space: normal;
         }
+
+        #clear-button {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
     </style>
 </head>
 
 <body>
     <div class="ui container" style="padding-top: 20px">
-        <h1 class="ui header">UI5 OData Payload Analyzer</h1>
+        <div style="position: relative;">
+            <h1 class="ui header">UI5 OData Payload Analyzer</h1>
+            <button class="ui button" id="clear-button"> Clear </button>
+        </div>
         <table class="ui selectable celled table" id="view-table">
             <thead>
                 <tr>
