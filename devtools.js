@@ -14,25 +14,15 @@ let unmarshalJSONIfPossible = data => {
     }
     if (Array.isArray(data)) {
         for (let i = 0; i < data.length; i++) {
-            let tmp = data[i]
             data[i] = unmarshalJSONIfPossible(data[i])
-            console.log(`Converted  ${tmp} to ${data[i]}`)
         }
         return data
     }
     switch (typeof data) {
         case "object":
-            if (data.length === 3) {
-                debugger
-            }
             Object.keys(data).forEach(key => {
-                let tmp = data[key]
                 data[key] = unmarshalJSONIfPossible(data[key])
-                console.log(`Converted  ${tmp} to ${data[key]}`)
             })
-            break
-        case "number":
-        case "boolean":
             break
         case "string":
             let tmp;
@@ -74,24 +64,32 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 return
             }
             matchResponsePayload.forEach((responseBodyRaw, index) => {
-                let name,
-                    requestType,
-                    requestData
-
+                let eventData = {
+                    path: urlParser.pathname,
+                    name: name,
+                    type: null,
+                    request: {
+                        data: null
+                    },
+                    response: {
+                        data: null
+                    },
+                    timestamp: new Date(data.startedDateTime).toTimeString().split(' ')[0]
+                }
                 let matchFunctionCall = /GET (\w+)(?:\?|)(?:\(|)(.*)(?:\)|) HTTP/.exec(matchRequestPayload[index])
                 let matchODataCall = /GET (\w+)\((.*')\)/.exec(matchRequestPayload[index])
                 if (matchODataCall) {
-                    requestType = "OData Read"
-                    name = matchODataCall[1]
-                    requestData = matchODataCall[2].split(",").map(item => ({
+                    eventData.type = "OData Read"
+                    eventData.name = matchODataCall[1]
+                    eventData.request.data = matchODataCall[2].split(",").map(item => ({
                         key: item.split("=")[0],
                         value: removeQuotesIfExist(item.split("=")[1])
                     }))
                 } else if (matchFunctionCall) {
-                    requestType = "Function Import"
-                    name = matchFunctionCall[1]
+                    eventData.type = "Function Import"
+                    eventData.name = matchFunctionCall[1]
                     if (matchFunctionCall[2]) {
-                        requestData = matchFunctionCall[2].split("&").map(item => ({
+                        eventData.request.data = matchFunctionCall[2].split("&").map(item => ({
                             key: item.split("=")[0],
                             value: decodeURIComponent(removeQuotesIfExist(item.split("=")[1]))
                         }))
@@ -101,22 +99,17 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                     return
                 }
 
-                let responseBody = JSON.parse(responseBodyRaw)
-                if ('d' in responseBody) {
-                    responseBody = responseBody.d
+                eventData.response.data = JSON.parse(responseBodyRaw)
+                if ('d' in eventData.response.data) {
+                    eventData.response.data = eventData.response.data.d
                 }
-                responseBody = deleteKey(responseBody, "__metadata")
-                responseBody = deleteKey(responseBody, "__deferred")
-                responseBody = unmarshalJSONIfPossible(responseBody)
-                requestData = unmarshalJSONIfPossible(requestData)
-                let eventData = {
-                    path: urlParser.pathname,
-                    responseBody: responseBody,
-                    requestData: requestData,
-                    requestType: requestType,
-                    name: name,
-                    timestamp: new Date(data.startedDateTime).toTimeString().split(' ')[0]
-                }
+
+                eventData.response.data = deleteKey(eventData.response.data, "__metadata")
+                eventData.response.data = deleteKey(eventData.response.data, "__deferred")
+
+                eventData.response.data = unmarshalJSONIfPossible(eventData.response.data)
+                eventData.request.data = unmarshalJSONIfPossible(eventData.request.data)
+
                 console.debug("Sending message to the tab", eventData)
                 chrome.runtime.sendMessage(eventData)
             })

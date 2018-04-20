@@ -3,6 +3,7 @@ var toastr = require("toastr")
 
 let store = []
 
+// Source: https://github.com/Chalarangelo/30-seconds-of-code/blob/master/snippets/copyToClipboard.md
 const copyToClipboard = str => {
     const el = document.createElement('textarea');  // Create a <textarea> element
     el.value = str;                                 // Set its value to the string that you want copied
@@ -34,21 +35,22 @@ let onTreeTableClick = (self, key, value) => {
 
 let showItem = index => {
     let currentItem = store[index]
-    $(".modal > .header").text(`${currentItem.requestType}: ${currentItem.name} (${currentItem.path})`)
+    $(".modal > .header").text(`${currentItem.type}: ${currentItem.name} (${currentItem.path})`)
 
-    if (currentItem.requestData) {
-        var requestJSONTree = new JSONTreeView("Payload", currentItem.requestData)
+    if (currentItem.request.data) {
+        var requestJSONTree = new JSONTreeView("Payload", currentItem.request.data)
         requestJSONTree.expand(true)
         requestJSONTree.on("click", onTreeTableClick)
         $(".modal > .content > div > div:nth-child(1) > div").html(requestJSONTree.dom)
         requestJSONTree.readonly = true
     }
-    var responseJSONTree = new JSONTreeView("Payload", currentItem.responseBody)
-    responseJSONTree.expand(true)
-    $(".modal > .content > div > div:nth-child(2) > div").html(responseJSONTree.dom)
-    responseJSONTree.readonly = true
-    responseJSONTree.on("click", onTreeTableClick)
-
+    if (currentItem.response.data) {
+        var responseJSONTree = new JSONTreeView("Payload", currentItem.response.data)
+        responseJSONTree.expand(true)
+        $(".modal > .content > div > div:nth-child(2) > div").html(responseJSONTree.dom)
+        responseJSONTree.on("click", onTreeTableClick)
+        responseJSONTree.readonly = true
+    }
     $(".fullscreen.modal").modal("show")
 }
 
@@ -71,7 +73,7 @@ $(document).ready(() => {
         store.unshift(data)
         viewTable.find("tbody").prepend(`<tr>
             <td>${data.path}</td>
-            <td>${data.requestType}</td>
+            <td>${data.type}</td>
             <td>${data.name}</td>
             <td>${data.timestamp}</td>
         </tr>`)
