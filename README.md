@@ -30,4 +30,4 @@ Here you can see an example OData read http call.
 
 ![Example detailed view of a function import](docs/function-import.png)
 
-And here a function import call. On the right side you see the response data and on the left side the request data which was sent to the backend.
+And here is a function import. On the left side is the request data which was sent to the backend and on the right the response data.
