@@ -65,6 +65,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
             }
             matchResponsePayload.forEach((responseBodyRaw, index) => {
                 let eventData = {
+                    url: data.request.url,
                     path: urlParser.pathname,
                     name: name,
                     type: null,

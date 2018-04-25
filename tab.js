@@ -33,8 +33,7 @@ let onTreeTableClick = (self, key, value) => {
     toastr.success("Copied selected node to clipboard")
 }
 
-let showItem = index => {
-    let currentItem = store[index]
+let showItem = currentItem => {
     $(".modal > .header").text(`${currentItem.type}: ${currentItem.name} (${currentItem.path})`)
 
     if (currentItem.request.data) {
@@ -76,12 +75,22 @@ $(document).ready(() => {
             <td>${data.type}</td>
             <td>${data.name}</td>
             <td>${data.timestamp}</td>
+            <td class="td-wifi-icon">
+                <button class="ui icon button">
+                    <i class="wifi icon"></i>
+                </button>
+            </td>
         </tr>`)
         let tableRows = viewTable.find("tr")
         tableRows.unbind("click")
         tableRows.click(e => {
             let index = $(e.target).closest("tr").index()
-            showItem(index)
+            let currentItem = store[index]
+            if ($(e.target).closest("td").hasClass("td-wifi-icon")) {
+                chrome.devtools.panels.openResource(currentItem.url);
+            } else {
+                showItem(currentItem)
+            }
         })
         sendResponse(true)
     })
