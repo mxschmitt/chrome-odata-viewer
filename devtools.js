@@ -56,7 +56,7 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
             if (!matchResponsePayload) {
                 return
             }
-            let matchRequestPayload = data.request.postData.text.match(/batch_(?:\w+-\w+-\w+)(.*?)(?:\n|\r\n){3}-/gs)
+            let matchRequestPayload = data.request.postData.text.match(/batch_(?:\w+-\w+-\w+)([\s\S]*)(?:\n|\r\n){3}-/g)
             if (!matchRequestPayload) {
                 return
             }
