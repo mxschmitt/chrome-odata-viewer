@@ -7,13 +7,20 @@
   "license": "MIT",
   "dependencies": {
     "browserify": "^16.2.0",
+    "file-loader": "^1.1.11",
     "json-tree-view": "^0.4.9",
     "key-del": "^1.3.0",
     "semantic-ui-css": "^2.3.1",
     "shx": "^0.2.2",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.6.0"
   },
   "scripts": {
-    "install": "browserify -d -e tab.js -o dist/tab.js && browserify -d -e devtools.js -o dist/devtools.js && shx rm -f _config.yml"
+    "install": "shx rm -f _config.yml"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.21.0"
   }
 }

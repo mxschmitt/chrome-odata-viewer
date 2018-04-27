@@ -1,5 +1,12 @@
-var JSONTreeView = require("json-tree-view")
-var toastr = require("toastr")
+import JSONTreeView from "json-tree-view";
+import { success } from "toastr"
+import 'semantic-ui-css/components/dimmer'
+import 'semantic-ui-css/components/transition'
+import 'semantic-ui-css/components/modal'
+
+import('semantic-ui-css/semantic.min.css')
+import('json-tree-view/devtools.css')
+import('toastr/build/toastr.min.css')
 
 let store = []
 
@@ -30,7 +37,7 @@ let onTreeTableClick = (self, key, value) => {
     } else {
         copyToClipboard(value)
     }
-    toastr.success("Copied selected node to clipboard")
+    success("Copied selected node to clipboard")
 }
 
 let showItem = currentItem => {
