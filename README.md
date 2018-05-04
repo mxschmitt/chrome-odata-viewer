@@ -6,17 +6,19 @@ Displays the UI5 OData network requests in a beautified clickable way like JSON.
 
 ## Installation
 
-1. Download the source code as zip file [here](https://github.com/mxschmitt/chrome-odata-viewer/archive/master.zip).
-2. Unzip to get the content.
-3. Install the global needed npm packages `browserify` and `shx` via `npm install -g browserify shx` or `yarn global add browserify shx`.
-3. Install the local npm packages by running `npm install` or `yarn install` in the directory.
-4. Navigate to the extensions page (or visit: `chrome://extensions/` directly).
-5. Install the unpacked extension in Chrome by clicking on the `LOAD UNPACKED` button and selecting the extracted directory there.
+Visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/ui5-odata-payload-analyze/ifkpkiacjcogbgbgeopcnpknhbeofhop?hl=de) and install the extension `UI5 OData Payload Analyzer`.
 
-## Requirements
+## Development Installation
+
+1. Clone the repository: `git clone https://github.com/mxschmitt/chrome-odata-viewer.git`
+3. Install `webpack-cli` globally: `npm install -g webpack-cli` or `yarn global add webpack-cli`
+2. Install the dependencies in the folder by running: `npm install` or `yarn install` in the directory
+5. Install the unpacked extension in Chrome by clicking on the `LOAD UNPACKED` button and selecting the `dist` directory there
+
+### Development Installation Requirements
 
 - Chrome
-- NPM to install the necessary packages
+- NPM / Yarn to install the necessary packages
 
 ## How to
 
