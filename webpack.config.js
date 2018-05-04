@@ -9,7 +9,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
+        filename: '[name].js',
+        publicPath: 'dist/'
     },
     watch: true,
     plugins: [
@@ -22,25 +23,15 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: [
-                    {
-                        loader: "style-loader",
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            root: 'dist/',
-                            publicPath: "dist/"
-                        }
-                    }
-                ],
-            }, {
+                use: ['style-loader', 'css-loader']
+            },
+            {
                 test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
                 loader: 'url-loader',
                 options: {
                     limit: 10000
                 }
-            },
+            }
         ]
     }
 }
