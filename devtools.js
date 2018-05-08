@@ -82,17 +82,21 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
                 if (matchODataCall) {
                     eventData.type = "OData Read"
                     eventData.name = matchODataCall[1]
-                    eventData.request.data = matchODataCall[2].split(",").map(item => ({
-                        key: item.split("=")[0],
-                        value: removeQuotesIfExist(item.split("=")[1])
+                    eventData.request.data = Object.assign({}, ...matchODataCall[2].split(",").map(item => {
+                        let obj = {}
+                        let itm = item.split("=")
+                        obj[itm[0]] = removeQuotesIfExist(itm[1])
+                        return obj
                     }))
                 } else if (matchFunctionCall) {
                     eventData.type = "Function Import"
                     eventData.name = matchFunctionCall[1]
                     if (matchFunctionCall[2]) {
-                        eventData.request.data = matchFunctionCall[2].split("&").map(item => ({
-                            key: item.split("=")[0],
-                            value: decodeURIComponent(removeQuotesIfExist(item.split("=")[1]))
+                        eventData.request.data = Object.assign({}, ...matchFunctionCall[2].split("&").map(item =>{
+                            let obj = {}
+                            let itm = item.split("=")
+                            obj[itm[0]] = decodeURIComponent(removeQuotesIfExist(itm[1]))
+                            return obj
                         }))
                     }
                 } else {
