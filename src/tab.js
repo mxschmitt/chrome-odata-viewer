@@ -1,12 +1,21 @@
 import JSONTreeView from "json-tree-view";
 import { success } from "toastr"
+import $ from 'jquery'
 import 'semantic-ui-css/components/dimmer'
 import 'semantic-ui-css/components/transition'
 import 'semantic-ui-css/components/modal'
 
-import('semantic-ui-css/semantic.min.css')
 import('json-tree-view/devtools.css')
 import('toastr/build/toastr.min.css')
+import('semantic-ui-css/components/table.css')
+import('semantic-ui-css/components/button.css')
+import('semantic-ui-css/components/icon.css')
+import('semantic-ui-css/components/modal.css')
+import('semantic-ui-css/components/dimmer.css')
+import('semantic-ui-css/components/transition.css')
+import('semantic-ui-css/components/grid.css')
+import('semantic-ui-css/components/reset.css')
+import('semantic-ui-css/components/header.css')
 
 let store = []
 

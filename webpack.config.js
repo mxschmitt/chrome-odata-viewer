@@ -5,6 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     mode: "production",
+    devtool: 'source-map',
+    context: path.join(__dirname, "src"),
     entry: {
         tab: "./tab.js",
         devtools: "./devtools.js"
@@ -20,7 +22,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             { from: 'devtools.html' },
-            { from: 'icon*.png' },
+            { from: 'icons/*' },
             { from: 'manifest.json' },
             { from: 'tab.html' }
         ])
