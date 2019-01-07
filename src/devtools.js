@@ -312,4 +312,4 @@ chrome.devtools.network.onRequestFinished.addListener(data => {
     }
 })
 
-chrome.devtools.panels.create("OData Payload Inspector", null, "tab.html")
+chrome.devtools.panels.create("OData Payload Inspector", null, "dist/tab.html")

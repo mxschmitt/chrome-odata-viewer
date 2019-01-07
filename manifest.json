@@ -13,5 +13,5 @@
         "tabs",
         "<all_urls>"
     ],
-    "devtools_page": "devtools.html"
+    "devtools_page": "dist/devtools.html"
 }
