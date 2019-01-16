@@ -1,5 +1,5 @@
-const jquery = require("jquery");
-window.$ = window.jQuery = jquery
+import "./import-jquery";
+
 import JSONTreeView from "json-tree-view";
 import { success } from "toastr"
 
@@ -41,7 +41,7 @@ let onTreeTableClick = (self, key, value) => {
 
 let showItem = currentItem => {
     $(".modal > .header").text(`${currentItem.type}: ${currentItem.name} (${currentItem.path})`)
-
+    
     if (currentItem.request.data) {
         var requestJSONTree = new JSONTreeView("Payload", currentItem.request.data)
         requestJSONTree.expand(true)
