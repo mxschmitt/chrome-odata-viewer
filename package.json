@@ -15,7 +15,6 @@
   },
   "scripts": {
     "start": "parcel --public-url ./ src/*.html src/tab.js",
-    "build": "parcel build --public-url ./ src/*.html src/tab.js",
-    "test": ""
+    "build": "parcel build --public-url ./ src/*.html src/tab.js"
   }
 }
