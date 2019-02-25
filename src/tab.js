@@ -1,12 +1,11 @@
+import "./import-jquery";
+
 import JSONTreeView from "json-tree-view";
 import { success } from "toastr"
+
 import 'semantic-ui-css/components/dimmer'
 import 'semantic-ui-css/components/transition'
 import 'semantic-ui-css/components/modal'
-
-import('semantic-ui-css/semantic.min.css')
-import('json-tree-view/devtools.css')
-import('toastr/build/toastr.min.css')
 
 let store = []
 
@@ -42,7 +41,7 @@ let onTreeTableClick = (self, key, value) => {
 
 let showItem = currentItem => {
     $(".modal > .header").text(`${currentItem.type}: ${currentItem.name} (${currentItem.path})`)
-
+    
     if (currentItem.request.data) {
         var requestJSONTree = new JSONTreeView("Payload", currentItem.request.data)
         requestJSONTree.expand(true)
